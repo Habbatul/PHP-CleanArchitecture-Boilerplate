@@ -6,5 +6,4 @@ This is a boilerplate implementing a layered approach while adhering to the clea
 - The framework component is only used in the Controller layer and outside of the Domain Layer (index.php, config.php and routes.php).
 - Only use 3 depedencies : php-di/php-di, symfony/routing, symfony/http-foundation
 
-Article about Clean Architecture : https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html
-Article about Layered Architecture : https://www.baeldung.com/cs/layered-architecture
+#### - Article about Clean Architecture : https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html <br> - Article about Layered Architecture : https://www.baeldung.com/cs/layered-architecture
