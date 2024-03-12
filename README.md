@@ -1,4 +1,4 @@
-### PHP with Clean Architecture Concept
+### PHP with Clean Architecture Concept (by hq.han)
 This is a boilerplate implementing a layered approach while adhering to the clean architecture concept by Uncle Bob.
 - Don't forget to run "composer install".
 - Make sure you have a basic understanding of Symfony/HttpFoundation & Symfony/Routing.
