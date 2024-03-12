@@ -1,0 +1,7 @@
+{
+    "require": {
+        "php-di/php-di": "^7.0",
+        "symfony/routing": "^7.0",
+        "symfony/http-foundation": "^7.0"
+    }
+}
