@@ -14,22 +14,20 @@ foreach (glob("app/entity/*") as $filename) {
     require_once $filename;
 }
 
-
 use Config\Database;
 use Controller\AuthController;
 use Repository\AdminRepository;
 use Repository\AdminRepositoryImpl;
 use Service\AuthService;
 use Service\AuthServiceImpl;
+use Controller\Home;
 
 use function DI\create;
 use function DI\get;
 use function DI\autowire;
 
-
-//depedency injection
 // Dependency injection configuration
-return [
+$dependencies = [
     // Database connection
     'database' => fn() => Database::getConnection(),
 
@@ -38,7 +36,15 @@ return [
     AuthController::class => autowire(),
 ];
 
+// ContainerBuilder initialization
+$containerBuilder = new DI\ContainerBuilder();
+$containerBuilder->addDefinitions($dependencies);
 
+// Build dependency container
+$container = $containerBuilder->build();
 
-
-
+// Return combined array of dependencies and controllers
+return array_merge($dependencies, [
+    'home' => new Home(),
+    'authController' => $container->get(AuthController::class),
+]);
