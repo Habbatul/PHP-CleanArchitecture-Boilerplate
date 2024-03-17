@@ -1,6 +1,4 @@
 <?php
-use Controller\AuthController;
-use Controller\Home;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
 use Symfony\Component\HttpFoundation\Request;
@@ -8,22 +6,8 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * Ini untuk Builder
  */
-//untuk inisiasi containerBuilder
-use DI\ContainerBuilder;
-// Membuat instance ContainerBuilder dan membangun kontainer dependensi
-$containerBuilder = new ContainerBuilder();
-$containerBuilder->addDefinitions(__DIR__ . '/config.php');
-$container = $containerBuilder->build();
-
-/**
- * instansiasi dulu bila method nya tidak static sperti : $home = new Home();
- * Jangan lupa panggil container yang sudah didefinisikan pada config
- */ 
-
-//container list
-$home = new Home();
-$authController = $container->get(AuthController::class);
-//Lanjutkan untuk container yang ingin dipanggil
+//untuk inisiasi controller yang berada di containerBuilder (pada folder depedencies.php)
+$di = require_once 'dependencies.php';
 
 /**
  * Dibawah ini adalah routing nya
@@ -49,8 +33,11 @@ function createRoute($path, $controller, $methodName) {
  */ 
 
 //routes list
-$routes->add('beranda', new Route('/', ['_controller' => [$home, 'beranda']]));
-$routes->add('about', createRoute('/tentangkami', $aboutController, 'halamanTerserah'));
+//bila tidak memiliki injection (pada  depedencies.php langsung di new)
+$routes->add('beranda', new Route('/', ['_controller' => [$di['home'], 'beranda']]));
+
+//halaman user
+$routes->add('about', createRoute('/tentangkami', $di['aboutController'], 'halamanTerserah'));
 
 //Lanjutkan untuk container yang ingin dipanggil
 
